@@ -1,30 +1,31 @@
 # kodemo
-A multi-part demo of ko
+This branch holds the second phase of the demo, which covers ko apply to deploy and watch.
 
 ## Script
 
 
 ```
-# First show the app source.
+# Show the changes to the app
 cat ./cmd/myapp/main.go
 
-# Show help for kubectl run
-kubectl help run | less
+# Show our knative service configuration
+cat ./config/service.yaml
 
-# Then "run" the app on Kubernetes.
-time ko run myapp --image=./cmd/myapp
+# Apply the yaml
+time ko apply -f config
 
-# Show the running deployment
-kubectl get deploy
+# Open it in a browser
 
-# Expose the service so that we can see it.
-# Pro-tip: this is long, have a "chicken" ready
-kubectl expose deployment myapp --port=80 --target-port=8080 --type=LoadBalancer
 
-# Wait for public IP
-watch kubectl get svc
+# Start the watch
+ko apply -W -f config
 
-# Show the service's output
-curl http://{THE_IP_ADDRESS}
+# Edit the config to change the environment variable.
+# No build, just reapplied.
+# Refresh browser tab.
+
+# Edit main.go to add punctuation.
+# Build, push, redeploy.
+# Refresh browser tab.
 
 ```
