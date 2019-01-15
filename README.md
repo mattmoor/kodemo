@@ -8,6 +8,11 @@ A multi-part demo of ko
 # First show the app source.
 cat ./cmd/myapp/main.go
 
+# Show that with no config we can publish this as a Docker image
+ko publish ./cmd/myapp
+
+# Open in GCR UI
+
 # Show help for kubectl run
 kubectl help run | less
 
